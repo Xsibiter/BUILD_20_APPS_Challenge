@@ -214,3 +214,21 @@ for index, question in enumerate(data):
     print(message)
 
 print(f"Your score: {score}")'''
+
+
+import FreeSimpleGUI as FSG
+
+label1 = FSG.Text("Select files to compress")
+input1 = FSG.Input()
+choose_button1 = FSG.FilesBrowse("Choose")
+
+label2 = FSG.Text("Select destination folder")
+input2 = FSG.Input()
+choose_button2 = FSG.FolderBrowse("Choose")
+
+compress_button = FSG.Button("Compress")
+window = FSG.Window("File Compressor",
+                    layout = [[label1,input1,choose_button1], [label2,input2,choose_button2], [compress_button]],)
+
+window.read()
+window.close()
