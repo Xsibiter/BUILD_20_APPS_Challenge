@@ -4,8 +4,9 @@ length = len(text)
 
 print("The length of the title is", length)
 print(length)'''
-from pet_projects.converters1 import convert_feet_inches
-from pet_projects.parsers1 import parse
+
+#from pet_projects.converters1 import convert_feet_inches
+#from pet_projects.parsers1 import parse
 
 '''password = input('Enter a password: ')
 while password != '11f2112':
@@ -142,7 +143,7 @@ average = get_average()
 print(average)'''
 
 
-feet_inches = input("Enter a feet and inches: ")
+'''feet_inches = input("Enter a feet and inches: ")
 
 f, i = parse(feet_inches)
 print(f,i)
@@ -151,4 +152,65 @@ result = convert_feet_inches(f, i)
 if result < 1:
     print("The feet", feet_inches, "inches exceed the feet.")
 else:
-    print("Kids can slide")
+    print("Kids can slide")'''
+
+'''import glob
+
+myfiles = glob.glob("*.txt")
+for filename in myfiles:
+    with open(filename, "r") as file:
+        content = file.read()
+        print(content)
+print(myfiles)'''
+
+'''import csv
+with open('weather.csv', 'r') as csvfile:
+    content = list(csv.reader(csvfile))
+    print(content)
+
+gibberish = input("Enter a gibberish: ")
+ 
+for row in content:
+    if row[0] == gibberish:
+        print(row[2])'''
+
+'''import shutil
+
+shutil.make_archive("weather", "zip", "images.jpeg")'''
+
+'''import webbrowser
+
+user_inquiry = input("Search term ")
+
+webbrowser.open(f"https://www.google.com/search?q={user_inquiry}")'''
+
+
+'''import json
+
+with open('questions.json', 'r') as file:
+    content = file.read()
+ 
+data = json.loads(content)
+
+
+for index, question in enumerate(data):
+    print(f'{index+1}) {question["question_text"]}')
+
+    for index, alternative in enumerate(question["alternative"]):
+        print(index+1,"-",alternative)
+    user_answer = int(input("Answer:"))
+    question["user_answer"] = user_answer
+
+score = 0
+for index, question in enumerate(data):
+    if question["user_answer"] == question["correct_answer"]:
+        score += 1
+        result = "Correct"
+    else:
+        result = "Wrong"
+
+    message = (f"{result} for {index+1} question.\nYour answer is {question['user_answer'] } " \
+               f", but the correct answer is {question['correct_answer']}")
+    print(message)
+
+print(f"Your score: {score}")'''
