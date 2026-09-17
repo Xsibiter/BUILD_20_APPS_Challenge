@@ -300,3 +300,16 @@ while True:
         print(f"Unknown event: {event}")
 
 window.close()'''
+
+import streamlit as st
+from PIL import Image
+
+photo = st.camera_input("Camera")
+
+img = Image.open(photo)
+
+gray_img = img.convert("L")
+
+st.image(gray_img, use_column_width=True)
+
+
