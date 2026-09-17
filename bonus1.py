@@ -216,19 +216,87 @@ for index, question in enumerate(data):
 print(f"Your score: {score}")'''
 
 
-import FreeSimpleGUI as FSG
+'''import FreeSimpleGUI as FSG
+import zipfile
+import pathlib
+
+def make_archive(filepaths, dest_path):
+    with zipfile.ZipFile(dest_path, "w", zipfile.ZIP_DEFLATED) as archive:
+        for filepath in filepaths:
+            filepath = pathlib.Path(filepath)
+            archive.write(filepath, arcname=filepath.name)
 
 label1 = FSG.Text("Select files to compress")
-input1 = FSG.Input()
-choose_button1 = FSG.FilesBrowse("Choose")
+input1 = FSG.Input(key="files")
+choose_button1 = FSG.FilesBrowse("Choose files", target="files")
 
 label2 = FSG.Text("Select destination folder")
-input2 = FSG.Input()
-choose_button2 = FSG.FolderBrowse("Choose")
+input2 = FSG.Input(key="folder")
+choose_button2 = FSG.FolderBrowse("Choose a folder", target="folder")
 
 compress_button = FSG.Button("Compress")
-window = FSG.Window("File Compressor",
-                    layout = [[label1,input1,choose_button1], [label2,input2,choose_button2], [compress_button]],)
+output = FSG.Text(key="output", text_color="green")
 
-window.read()
-window.close()
+window = FSG.Window(
+    "File Compressor",
+    layout=[
+        [label1, input1, choose_button1],
+        [label2, input2, choose_button2],
+        [compress_button, output],
+    ],
+)
+
+while True:
+    event, values = window.read()
+
+    if event in (FSG.WIN_CLOSED, None):
+        break
+
+    if event == "Compress":
+        filepaths = [p for p in values["files"].split(";") if p]
+        folder = values["folder"]
+
+        if not filepaths or not folder:
+            window["output"].update(value="Select files and a folder", text_color="red")
+            continue
+
+        dest_path = pathlib.Path(folder) / "compressed.zip"
+        try:
+            make_archive(filepaths, dest_path)
+            window["output"].update(value="Compression completed", text_color="green")
+        except OSError as exc:
+            window["output"].update(value=f"Failed: {exc}", text_color="red")
+
+window.close()'''
+
+'''import FreeSimpleGUI as sg
+
+
+def meters_from_feet_inch(feet, inches):
+    meters = float(feet)*0.3048+float(inches)*0.0254
+    return meters
+
+label_feet = sg.Text("Enter feet:",)
+input_feet = sg.Input(key="feet")
+
+label_inches = sg.Text("Enter inches:",)
+input_inches = sg.Input(key="inches")
+
+convert_button = sg.Button("Convert")
+output = sg.Text(key="output", text_color="Yellow")
+
+window = sg.Window("Feet inches -> Meters", layout=[[label_feet, input_feet],
+                                                    [label_inches, input_inches],
+                                                    [convert_button, output]],)
+
+while True:
+    event, values = window.read()
+    if event in (sg.WIN_CLOSED, None):
+        break
+    if event == "Convert":
+        meters = meters_from_feet_inch(values["feet"], values["inches"])
+        window["output"].update(value=f'Meters: {meters:.3f}m', text_color="cyan")
+    else:
+        print(f"Unknown event: {event}")
+
+window.close()'''
